@@ -1,44 +1,54 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Spring MVC Tutorial</title>
+
+<head th:include="fragments/bootstrap :: bootstrap">
 </head>
+
 <body>
-<form method="post" action="#" th:action="@{/students}" th:object="${student}">
-    <label>Age: </label>
-    <input type="number" th:field="*{age}">
+    <div th:replace="fragments/header :: header"></div>
 
     <br>
 
-    <label>Name: </label>
-    <input type="text" th:field="*{name}">
+    <form method="post" action="#" th:action="@{/students}" th:object="${student}">
+        <div class="form-group">
+            <label for="student-age">Age: </label>
+            <input type="number" th:field="*{age}" id="student-age">
+        </div>
+
+        <br>
+
+        <div class="form-group">
+            <label for="student-name">Name: </label>
+            <input type="text" th:field="*{name}" id="student-name">
+        </div>
+
+        <br><br>
+
+        <button type="submit" class="btn btn-primary" value="Salvar" id="submit-student">SALVAR</button>
+    </form>
 
     <br><br>
 
-    <input type="submit" value="Salvar">
-</form>
+    <div th:unless="${#lists.isEmpty(students)}">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Age</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="student: ${students}">
+                <td th:text="${student.id}"></td>
+                <td th:text="${student.name}"></td>
+                <td th:text="${student.age}"></td>
+            </tr>
 
-<br><br>
+            </tbody>
+        </table>
+    </div>
 
-<div th:unless="${#lists.isEmpty(students)}">
-    <table>
-
-        <tbody>
-        <tr>
-            <td>Id</td>
-            <td>Name</td>
-            <td>Age</td>
-        </tr>
-
-        <tr th:each="student: ${students}">
-            <td th:text="${student.id}"></td>
-            <td th:text="${student.name}"></td>
-            <td th:text="${student.age}"></td>
-        </tr>
-
-        </tbody>
-    </table>
-</div>
+    <div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

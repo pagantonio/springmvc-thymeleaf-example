@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Spring MVC Tutorial</title>
+    <div th:replace="fragments/bootstrap :: bootstrap"></div>
 </head>
 <body>
-<p>Title of tutorial: [[${title}]]</p>
-<p>Description: [(${description})]</p>
+
+    <div th:replace="fragments/header :: header"></div>
+    
+    <br>
+
+    <h1>[[${description}]]</h1>
+
+    <h1 th:text="${description}"> </h1>
+
+    <div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>
